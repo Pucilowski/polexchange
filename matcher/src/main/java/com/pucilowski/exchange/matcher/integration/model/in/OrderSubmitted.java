@@ -1,4 +1,4 @@
-package com.pucilowski.exchange.matcher.integration.in;
+package com.pucilowski.exchange.matcher.integration.model.in;
 
 import com.pucilowski.exchange.common.enums.OrderSide;
 

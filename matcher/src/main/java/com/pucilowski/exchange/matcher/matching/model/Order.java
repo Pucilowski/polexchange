@@ -2,7 +2,7 @@ package com.pucilowski.exchange.matcher.matching.model;
 
 
 import com.pucilowski.exchange.common.enums.OrderSide;
-import com.pucilowski.exchange.matcher.integration.in.OrderSubmitted;
+import com.pucilowski.exchange.matcher.integration.model.in.OrderSubmitted;
 
 /**
  * Created with IntelliJ IDEA.

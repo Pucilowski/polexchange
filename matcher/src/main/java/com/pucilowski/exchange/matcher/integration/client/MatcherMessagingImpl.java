@@ -1,8 +1,8 @@
 package com.pucilowski.exchange.matcher.integration.client;
 
-import com.pucilowski.exchange.matcher.integration.in.OrderCancelled;
-import com.pucilowski.exchange.matcher.integration.in.OrderSubmitted;
-import com.pucilowski.exchange.matcher.integration.out.TradeExecuted;
+import com.pucilowski.exchange.matcher.integration.model.in.OrderCancelled;
+import com.pucilowski.exchange.matcher.integration.model.in.OrderSubmitted;
+import com.pucilowski.exchange.matcher.integration.model.out.TradeExecuted;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

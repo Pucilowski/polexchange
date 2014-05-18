@@ -1,7 +1,7 @@
 package com.pucilowski.exchange.matcher.integration.server;
 
-import com.pucilowski.exchange.matcher.integration.in.OrderCancelled;
-import com.pucilowski.exchange.matcher.integration.in.OrderSubmitted;
+import com.pucilowski.exchange.matcher.integration.model.in.OrderCancelled;
+import com.pucilowski.exchange.matcher.integration.model.in.OrderSubmitted;
 import com.pucilowski.exchange.matcher.matching.model.Trade;
 
 /**
