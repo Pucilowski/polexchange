@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class IntegrationIntegrationImpl implements IntegrationIntegration {
+public class OrderListenerImpl implements OrderListener {
     @Override
-    public void inputOrder(OrderSubmitted order) {
-
+    public void orderSubmitted(OrderSubmitted order) {
+        System.out.println("Order submitted: " + order);
     }
 
     @Override
-    public void cancelOrder(OrderCancelled order) {
-
+    public void orderCancelled(OrderCancelled order) {
+        System.out.println("Order cancelled: " + order);
     }
 }

@@ -1,7 +1,9 @@
 package com.pucilowski.exchange.integration.service.client;
 
+import com.pucilowski.exchange.integration.service.MatcherSharedConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 
 /**
@@ -10,6 +12,7 @@ import org.springframework.context.annotation.ImportResource;
 
 @Configuration
 @ComponentScan(basePackageClasses = ClientMarker.class)
+@Import(MatcherSharedConfig.class)
 @ImportResource("classpath:spring/rabbit-client.xml")
 public class MatcherClientConfig {
 }

@@ -2,7 +2,6 @@ package com.pucilowski.exchange.integration.service.client;
 
 import com.pucilowski.exchange.integration.model.in.OrderCancelled;
 import com.pucilowski.exchange.integration.model.in.OrderSubmitted;
-import com.pucilowski.exchange.integration.model.out.TradeExecuted;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -32,6 +31,8 @@ public class MatcherClientImpl implements MatcherClient {
     RabbitTemplate rabbitTemplate;
     //@Autowired
     //TradeService tradeService;
+    @Autowired
+    TradeListener tradeListener;
 
     @Override
     @Transactional
@@ -72,12 +73,7 @@ public class MatcherClientImpl implements MatcherClient {
     }
 
 
-    @Override
-    public void tradeExecuted(TradeExecuted trade) {
-        System.out.println("New trade: " + trade);
 
-
-    }
 
 
 }

@@ -14,7 +14,7 @@
 
     <rabbit:template id="matcherRabbit" connection-factory="connectionFactory"
                      message-converter="jsonMessageConverter"
-                     exchange="orders" routing-key="foo.bar"/>
+                     exchange="${exchange.name}" routing-key="foo.bar"/>
 
     <!--    <rabbit:admin connection-factory="connectionFactory" />
 
@@ -28,9 +28,9 @@
 
     <!--<bean id="orderListener" class="com.pucilowski.exchange.matcher.integration.service.OrderListenerImpl"/>-->
     <rabbit:listener-container connection-factory="connectionFactory" message-converter="jsonMessageConverter">
-        <rabbit:listener ref="matcherServerImpl" method="orderSubmitted"
+        <rabbit:listener ref="orderListenerImpl" method="orderSubmitted"
                          queue-names="order.submitted.${market.base}.${market.counter}"/>
-        <rabbit:listener ref="matcherServerImpl" method="orderCancelled"
+        <rabbit:listener ref="orderListenerImpl" method="orderCancelled"
                          queue-names="order.cancelled.${market.base}.${market.counter}"/>
     </rabbit:listener-container>
 

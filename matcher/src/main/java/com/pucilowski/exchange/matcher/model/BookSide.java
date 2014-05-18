@@ -25,9 +25,7 @@ public class BookSide {
         }
     });
 
-
     public int best;
-
 
     public BookSide(OrderSide side) {
         this.side = side;
@@ -68,7 +66,6 @@ public class BookSide {
         if (topOrders.isEmpty()) return null;
         return topOrders.peek();
     }
-
 
     private class PriceLevel {
         private final int price;

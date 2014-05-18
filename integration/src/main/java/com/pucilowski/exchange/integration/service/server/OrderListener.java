@@ -6,10 +6,10 @@ import com.pucilowski.exchange.integration.model.in.OrderSubmitted;
 /**
  * Created by martin on 18/05/14.
  */
-public interface IntegrationIntegration {
+public interface OrderListener {
 
-    public void inputOrder(OrderSubmitted order);
+    public void orderSubmitted(OrderSubmitted order);
 
-    public void cancelOrder(OrderCancelled order);
+    public void orderCancelled(OrderCancelled order);
 
 }

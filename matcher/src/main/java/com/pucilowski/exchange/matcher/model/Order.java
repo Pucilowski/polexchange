@@ -1,8 +1,7 @@
 package com.pucilowski.exchange.matcher.model;
 
-
 import com.pucilowski.exchange.common.enums.OrderSide;
-import com.pucilowski.exchange.matcher.integration.model.in.OrderSubmitted;
+import com.pucilowski.exchange.integration.model.in.OrderSubmitted;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,25 +12,24 @@ import com.pucilowski.exchange.matcher.integration.model.in.OrderSubmitted;
  */
 public class Order implements Comparable {
 
-    public long id;
+    final long id;
+    final public OrderSide side;
 
-    public OrderSide side;
-
-    public int price;
-    public int quantity;
+    final public int price;
+    final public int quantity;
 
     public int remaining;
 
-    public Order() {
-
+    public Order(long id, OrderSide side, int price, int quantity) {
+        this.id = id;
+        this.side = side;
+        this.price = price;
+        this.quantity = quantity;
+        this.remaining = quantity;
     }
 
     public Order(OrderSubmitted order) {
-        this.id = order.id;
-        this.side = order.side;
-        this.price = order.price;
-        this.quantity = order.quantity;
-        this.remaining = order.quantity;
+        this(order.id, order.side, order.price, order.quantity);
     }
 
     @Override

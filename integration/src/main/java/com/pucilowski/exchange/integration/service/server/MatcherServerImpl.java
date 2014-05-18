@@ -35,7 +35,7 @@ public class MatcherServerImpl implements MatcherServer {
     RabbitTemplate rabbitTemplate;
 
     @Autowired
-    IntegrationIntegration matcher;
+    OrderListener orderListener;
 
     @Override
     public void tradeExecuted(TradeExecuted trade) {
@@ -51,20 +51,5 @@ public class MatcherServerImpl implements MatcherServer {
 
         //System.out.println("Sending to : " + queueName);
         rabbitTemplate.convertAndSend(executedQueue, trade);
-    }
-
-
-    @Override
-    public void orderSubmitted(OrderSubmitted order) {
-        System.out.println("Order submitted: " + order);
-
-        matcher.inputOrder(order);
-    }
-
-    @Override
-    public void orderCancelled(OrderCancelled order) {
-        System.out.println("Order cancelled: " + order);
-
-        matcher.cancelOrder(order);
     }
 }

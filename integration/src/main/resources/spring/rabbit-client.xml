@@ -26,9 +26,9 @@
             </rabbit:bindings>
         </rabbit:topic-exchange>-->
 
-    <!--<bean id="orderListener" class="com.pucilowski.exchange.matcher.integration.service.OrderListenerImpl"/>-->
+    <bean id="tradeListener" class="com.pucilowski.exchange.integration.service.client.TradeListenerImpl"/>
     <rabbit:listener-container connection-factory="connectionFactory" message-converter="jsonMessageConverter">
-        <!--<rabbit:listener ref="matcherClientImpl" method="tradeExecuted" queue-names="trade.executed"/>-->
+        <rabbit:listener ref="tradeListener" method="tradeExecuted" queue-names="trade.executed"/>
     </rabbit:listener-container>
 
 
