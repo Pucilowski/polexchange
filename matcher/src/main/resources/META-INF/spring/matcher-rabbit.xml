@@ -4,45 +4,34 @@
 -->
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:rabbit="http://www.springframework.org/schema/rabbit"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
          http://www.springframework.org/schema/beans/spring-beans.xsd
-         http://www.springframework.org/schema/context
-         http://www.springframework.org/schema/context/spring-context.xsd
          http://www.springframework.org/schema/rabbit
-         http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
-
-         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-
-          http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+         http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
 
     <!-- ========================= DATASOURCE DEFINITION ========================= -->
 
-
-    <rabbit:connection-factory id="connectionFactory" />
-
-    <rabbit:template id="rabbitTemplate" connection-factory="connectionFactory"
+    <bean id="jsonMessageConverter" class="org.springframework.amqp.support.converter.JsonMessageConverter"/>
+    <rabbit:connection-factory id="connectionFactory"/>
+    <rabbit:template id="matcherRabbit" connection-factory="connectionFactory"
+                     message-converter="jsonMessageConverter"
                      exchange="orders" routing-key="foo.bar"/>
 
-<!--    <rabbit:admin connection-factory="connectionFactory" />
+    <!--    <rabbit:admin connection-factory="connectionFactory" />
 
-    <rabbit:queue name="myQueue" />
+        <rabbit:queue name="myQueue" />
 
-    <rabbit:topic-exchange name="myExchange">
-        <rabbit:bindings>
-            <rabbit:binding queue="myQueue" pattern="orders.submitted.*" />
-        </rabbit:bindings>
-    </rabbit:topic-exchange>-->
+        <rabbit:topic-exchange name="myExchange">
+            <rabbit:bindings>
+                <rabbit:binding queue="myQueue" pattern="orders.submitted.*" />
+            </rabbit:bindings>
+        </rabbit:topic-exchange>-->
 
-    <bean id="orderListener" class="com.pucilowski.exchange.matcher.integration.service.OrderListenerImpl" />
-
-    <rabbit:listener-container connection-factory="connectionFactory" message-converter="json">
-        <rabbit:listener ref="orderListener" method="orderSubmitted" queue-names="orders.submit.ltc.btc"  />
-        <rabbit:listener ref="orderListener" method="orderCancelled" queue-names="orders.cancel.ltc.btc"  />
+    <!--<bean id="orderListener" class="com.pucilowski.exchange.matcher.integration.service.OrderListenerImpl"/>-->
+    <rabbit:listener-container connection-factory="connectionFactory" message-converter="jsonMessageConverter">
+        <rabbit:listener ref="matchBroadcasterImpl" method="orderSubmitted" queue-names="order.submitted.ltc.btc"/>
+        <rabbit:listener ref="matchBroadcasterImpl" method="orderCancelled" queue-names="order.cancelled.ltc.btc"/>
     </rabbit:listener-container>
 
-    <bean id="json" class="org.springframework.amqp.support.converter.JsonMessageConverter"/>
+
 </beans>

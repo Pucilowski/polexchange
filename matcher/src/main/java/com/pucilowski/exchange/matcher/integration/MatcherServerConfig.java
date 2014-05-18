@@ -1,5 +1,6 @@
-package com.pucilowski.exchange.main;
+package com.pucilowski.exchange.matcher.integration;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.ImportResource;
  */
 
 @Configuration
+@ComponentScan(basePackages = {"com.pucilowski.exchange.matcher.integration.server"})
 @ImportResource("classpath:META-INF/spring/applicationContext-rabbit.xml")
-public class RabbitConfig {
+public class MatcherServerConfig {
 }

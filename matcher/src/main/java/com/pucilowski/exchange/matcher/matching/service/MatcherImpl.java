@@ -3,7 +3,7 @@ package com.pucilowski.exchange.matcher.matching.service;
 import com.pucilowski.exchange.common.enums.OrderSide;
 import com.pucilowski.exchange.matcher.matching.model.Order;
 import com.pucilowski.exchange.matcher.matching.model.BookSide;
-import com.pucilowski.exchange.matcher.integration.service.MatchBroadcaster;
+import com.pucilowski.exchange.matcher.integration.server.MatchBroadcaster;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

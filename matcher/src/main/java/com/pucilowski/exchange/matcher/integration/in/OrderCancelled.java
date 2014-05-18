@@ -1,4 +1,4 @@
-package com.pucilowski.exchange.matcher.integration.request;
+package com.pucilowski.exchange.matcher.integration.in;
 
 /**
  * Created by martin on 13/05/14.
