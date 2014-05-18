@@ -26,16 +26,16 @@ public class OrderApiController {
 
 
     @RequestMapping(value = "/order/submit", method = RequestMethod.POST)
-    public String submitOrder(@RequestBody SubmitOrder dto) {
-        userService.submitOrder(dto);
+    public String submitOrder(@RequestBody SubmitOrder order) {
+        userService.submitOrder(order);
 
         return "order submitted";
     }
 
     @RequestMapping(value = "/order/cancel", method = RequestMethod.POST)
-    public String cancelOrder(@RequestBody CancelOrder dto) {
+    public String cancelOrder(@RequestBody CancelOrder order) {
 
-        userService.cancelOrder(dto);
+        userService.cancelOrder(order);
 
         System.out.println("ctrl");
         return "markets/list";

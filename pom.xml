@@ -11,8 +11,9 @@
 
     <modules>
         <module>main</module>
-        <module>common</module>
         <module>matcher</module>
+        <module>integration</module>
+        <module>common</module>
     </modules>
 
     <properties>

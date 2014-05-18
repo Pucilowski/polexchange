@@ -1,6 +1,8 @@
 package com.pucilowski.exchange.matcher;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -16,12 +18,15 @@ import org.springframework.stereotype.Component;
 public class Run {
 
 
+
     public static void main(String[] args) {
         //book = new MarketMatcher();
 
         //MarketMatcher unit = new MarketMatcher();
-        ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/applicationContext*.xml");
-        Run p = (Run) context.getBean("run");
+        //ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/matcherContext.xml");
+        //Run p = (Run) context.getBean("run");
+        ConfigurableApplicationContext context =
+                SpringApplication.run(MatcherConfig.class, args);
 
 
 

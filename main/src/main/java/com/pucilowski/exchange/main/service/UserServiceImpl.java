@@ -1,6 +1,6 @@
 package com.pucilowski.exchange.main.service;
 
-import com.pucilowski.exchange.main.service.matcher.MatcherNotifier;
+import com.pucilowski.exchange.matcher.integration.client.MatcherClient;
 import com.pucilowski.exchange.main.web.api.request.CancelOrder;
 import com.pucilowski.exchange.main.web.api.request.SubmitOrder;
 import com.pucilowski.exchange.main.persistence.entity.Currency;
@@ -28,13 +28,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     TradeRepository tradeRepository;
 
-
-
     @Autowired
     OrderRepository orderRepository;
 
     @Autowired
-    MatcherNotifier matcherNotifier;
+    MatcherClient matcherClient;
 
     @Override
     @Transactional

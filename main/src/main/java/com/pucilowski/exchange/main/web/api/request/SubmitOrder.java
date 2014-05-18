@@ -18,6 +18,33 @@ public class SubmitOrder {
     private int price;
     private int quantity;
 
+    public SubmitOrder() {
+    }
+
+    public String getBase() {
+        return base;
+    }
+
+    public void setBase(String base) {
+        this.base = base;
+    }
+
+    public String getCounter() {
+        return counter;
+    }
+
+    public void setCounter(String counter) {
+        this.counter = counter;
+    }
+
+    public OrderSide getSide() {
+        return side;
+    }
+
+    public void setSide(OrderSide side) {
+        this.side = side;
+    }
+
     public int getPrice() {
         return price;
     }
@@ -34,43 +61,13 @@ public class SubmitOrder {
         this.quantity = quantity;
     }
 
-    public OrderSide getSide() {
-        return side;
-    }
+    public SubmitOrder(String base, String counter, OrderSide side, int price, int quantity) {
+        this.base=base;
+        this.counter=counter;
 
-    public void setSide(OrderSide side) {
-        this.side = side;
-    }
-
-    public String getCounter() {
-        return counter;
-    }
-
-    public void setCounter(String counter) {
-        this.counter = counter;
-    }
-
-    public String getBase() {
-        return base;
-    }
-
-    public void setBase(String base) {
-        this.base = base;
-    }
-
-
-    public static SubmitOrder toDto(String base, String counter, OrderSide side, int price, int quantity) {
-        SubmitOrder order = new SubmitOrder();
-
-        order.setBase(base);
-        order.setCounter(counter);
-
-        order.setSide(side);
-        order.setPrice(price);
-        order.setQuantity(quantity);
-
-
-        return order;
+        this.side=side;
+        this.price=price;
+        this.quantity=quantity;
     }
 
 }
