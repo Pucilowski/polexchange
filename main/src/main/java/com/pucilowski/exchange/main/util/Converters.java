@@ -9,6 +9,9 @@ import com.pucilowski.exchange.main.persistence.entity.id.CurrencyPair;
 public class Converters {
 
     public static CurrencyPair toCurrency(String base, String counter) {
+        base = base.toUpperCase();
+        counter = counter.toUpperCase();
+
         return new CurrencyPair(new Currency(base), new Currency(counter));
     }
 

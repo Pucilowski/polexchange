@@ -49,7 +49,11 @@ public class BookSide {
     }
 
     public boolean satisfies(int offer, int offer2) {
-        return side == OrderSide.BID ? offer >= offer2 : offer2 <= offer;
+        return side == OrderSide.BID ? offer <= offer2 : offer >= offer2;
+    }
+
+    public boolean isEmpty() {
+        return levels.isEmpty();
     }
 
     public void insert(Order o) {
@@ -84,9 +88,9 @@ public class BookSide {
     }
 
     public Map<Integer, List<Integer>> getBook() {
-        Map<Integer, List<Integer>> book= new LinkedHashMap<>();
+        Map<Integer, List<Integer>> book = new LinkedHashMap<>();
 
-        for(PriceLevel level : levels.values()) {
+        for (PriceLevel level : levels.values()) {
             List<Integer> volumes = new ArrayList<>();
 
             LinkedList<Order> orders = level.orders;
@@ -101,14 +105,13 @@ public class BookSide {
     }
 
     public void dumpString() {
-        for(PriceLevel level : levels.values()) {
+        for (PriceLevel level : levels.values()) {
             System.out.println("Price: " + level.price);
-            for(Order order : level.orders) {
-                System.out.println("\t"+order.getRemaining() + " @ " + order.getPrice());
+            for (Order order : level.orders) {
+                System.out.println("\t" + order.getRemaining() + " @ " + order.getPrice());
             }
         }
     }
-
 
 
     private class PriceLevel {

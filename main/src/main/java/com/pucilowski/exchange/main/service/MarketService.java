@@ -1,8 +1,8 @@
 package com.pucilowski.exchange.main.service;
 
 import com.pucilowski.exchange.api.response.MarketDTO;
-import com.pucilowski.exchange.api.response.OrderbookDTO;
-import com.pucilowski.exchange.api.response.TradeDTO;
+import com.pucilowski.exchange.api.response.MarketOrder;
+import com.pucilowski.exchange.api.response.MarketTrade;
 
 import java.util.Collection;
 
@@ -15,8 +15,10 @@ public interface MarketService {
 
     MarketDTO getMarket(String base, String counter);
 
-    OrderbookDTO getOrderbook(String base, String counter);
+    Collection<MarketOrder> getBids(String base, String counter);
 
-    TradeDTO getTrades(String base, String counter);
+    Collection<MarketOrder> getAsks(String base, String counter);
+
+    Collection<MarketTrade> getHistory(String base, String counter);
 }
 

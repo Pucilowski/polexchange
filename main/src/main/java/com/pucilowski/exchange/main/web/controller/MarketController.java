@@ -1,8 +1,8 @@
 package com.pucilowski.exchange.main.web.controller;
 
+import com.pucilowski.exchange.api.response.MarketDTO;
 import com.pucilowski.exchange.main.service.MarketService;
 import com.pucilowski.exchange.main.service.UserService;
-import com.pucilowski.exchange.api.response.MarketDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,9 +26,9 @@ public class MarketController {
 
     @RequestMapping(value = "/markets")
     public String getMarkets(Model model) {
-        Collection<MarketDTO> markets = marketService.getMarkets();
+        Collection<MarketDTO> marketDTOs = marketService.getMarkets();
 
-        model.addAttribute("market", markets);
+        model.addAttribute("market", marketDTOs);
 
         return "markets/list";
     }
@@ -38,9 +38,9 @@ public class MarketController {
         base = base.toUpperCase();
         counter = counter.toUpperCase();
 
-        MarketDTO market = marketService.getMarket(base, counter);
+        MarketDTO marketDTO = marketService.getMarket(base, counter);
 
-        model.addAttribute("market", market);
+        model.addAttribute("market", marketDTO);
 
         return "markets/view";
     }

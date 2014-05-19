@@ -16,7 +16,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 //@EnableAutoConfiguration
 @EnableWebMvc
 //@ComponentScan(basePackages = {        "com.pucilowski.exchange.web.api.controller",        "com.pucilowski.exchange.web.controller"})
-@ComponentScan(basePackages = {"com.pucilowski.exchange.web"})
+@ComponentScan(basePackages = {"com.pucilowski.exchange.main.web"})
 //@ComponentScan(basePackages = {"com.pucilowski.exchange.web", "com.pucilowski.exchange.web.api.controller", "com.pucilowski.exchange.web.controller"})
 //@ComponentScan(basePackages = {        "com.pucilowski.exchange.web.api.controller",        "com.pucilowski.exchange.web.controller"})
 public class WebMvcConfig extends WebMvcConfigurerAdapter {

@@ -1,8 +1,6 @@
 package com.pucilowski.exchange.matcher;
 
 import com.pucilowski.exchange.integration.service.server.MatcherServerConfig;
-import com.pucilowski.exchange.integration.service.server.OrderListener;
-import com.pucilowski.exchange.matcher.service.OrderListenerImpl;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 

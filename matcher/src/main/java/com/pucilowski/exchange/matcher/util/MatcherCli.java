@@ -1,7 +1,6 @@
 package com.pucilowski.exchange.matcher.util;
 
 import com.pucilowski.exchange.common.enums.OrderSide;
-import com.pucilowski.exchange.integration.model.in.OrderSubmitted;
 import com.pucilowski.exchange.integration.model.out.TradeExecuted;
 import com.pucilowski.exchange.integration.service.server.MatcherServer;
 import com.pucilowski.exchange.matcher.model.Order;
@@ -27,7 +26,7 @@ public class MatcherCli {
         matcher = new MatcherImpl();
         matcher.matcherServer = new MatcherServerPrinter();
 
-        submitOrder(OrderSide.BID, 70, 230);
+/*        submitOrder(OrderSide.BID, 70, 230);
         submitOrder(OrderSide.BID, 80, 220);
         submitOrder(OrderSide.BID, 90, 50);
         submitOrder(OrderSide.BID, 90, 100);
@@ -35,7 +34,7 @@ public class MatcherCli {
         submitOrder(OrderSide.ASK, 110, 100);
         submitOrder(OrderSide.ASK, 120, 250);
         submitOrder(OrderSide.ASK, 120, 150);
-        submitOrder(OrderSide.ASK, 130, 200);
+        submitOrder(OrderSide.ASK, 130, 200);*/
 
         printBook();
 

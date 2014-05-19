@@ -3,14 +3,11 @@ package com.pucilowski.exchange.matcher.service;
 import com.pucilowski.exchange.common.enums.OrderSide;
 import com.pucilowski.exchange.integration.model.out.TradeExecuted;
 import com.pucilowski.exchange.integration.service.server.MatcherServer;
-import com.pucilowski.exchange.matcher.model.*;
+import com.pucilowski.exchange.matcher.model.BookSide;
+import com.pucilowski.exchange.matcher.model.Order;
+import com.pucilowski.exchange.matcher.model.Trade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.text.DecimalFormat;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by martin on 18/05/14.
@@ -38,16 +35,19 @@ public class MatcherImpl implements Matcher {
         BookSide book = getBook(input);
         BookSide counterBook = getCounterBook(input);
 
-        if (input.getSide() == OrderSide.BID && input.getPrice() < asks.bestAsk()) {
+        if (input.getSide() == OrderSide.BID && (asks.isEmpty() || input.getPrice() < asks.bestAsk())) {
+            System.out.println("Inserted into bidside");
             bids.insert(input);
             return;
-        } else if (input.getSide() == OrderSide.ASK && input.getPrice() > bids.bestBid()) {
+        } else if (input.getSide() == OrderSide.ASK && (bids.isEmpty() || input.getPrice() > bids.bestBid())) {
+            System.out.println("Inserted into askside");
             asks.insert(input);
             return;
         }
 
         while (input.getRemaining() > 0) {
             Order counter = counterBook.bestOffer(input.getPrice());
+            System.out.println("Attempting match against: " + counter);
             if (counter == null) break;
 
             int tradePrice = counter.getPrice();
@@ -80,7 +80,6 @@ public class MatcherImpl implements Matcher {
     }
 
 
-
     public void executeTrade(Trade trade) {
         TradeExecuted t = new TradeExecuted();
 
@@ -89,7 +88,7 @@ public class MatcherImpl implements Matcher {
         t.setPrice(trade.price);
         t.setQuantity(trade.quantity);
 
-        System.out.println("Out: " + trade);
+        //System.out.println("Out: " + trade);
         matcherServer.tradeExecuted(t);
     }
 

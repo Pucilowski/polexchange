@@ -14,7 +14,11 @@ public class MarketDTO {
     private String counter;
 
     public MarketDTO() {
+    }
 
+    public MarketDTO(String base, String counter) {
+        this.base = base;
+        this.counter = counter;
     }
 
     public String getBase() {

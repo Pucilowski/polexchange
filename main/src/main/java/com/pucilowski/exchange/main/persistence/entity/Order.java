@@ -32,10 +32,10 @@ public class Order {
     public OrderSide side;
 
     @Column(updatable = false)
-    public int quantity;
+    public int price;
 
     @Column(updatable = false)
-    public int price;
+    public int quantity;
 
     public int remaining;
 

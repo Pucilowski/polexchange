@@ -1,7 +1,7 @@
 package com.pucilowski.exchange.main.service;
 
-import com.pucilowski.exchange.api.request.CancelOrder;
-import com.pucilowski.exchange.api.request.SubmitOrder;
+import com.pucilowski.exchange.api.user.request.SubmitOrder;
+import com.pucilowski.exchange.integration.model.in.OrderSubmitted;
 import com.pucilowski.exchange.main.persistence.entity.Order;
 import com.pucilowski.exchange.main.persistence.entity.Trade;
 
@@ -12,11 +12,11 @@ import java.util.Collection;
  */
 public interface UserService {
 
-    public void submitOrder(SubmitOrder dto);
+    Collection<Order> getOrders();
 
-    void cancelOrder(CancelOrder dto);
+    OrderSubmitted submitOrder(SubmitOrder dto);
 
-    public Collection<Order> getOrders();
+    void cancelOrder(Long id);
 
-    public Collection<Trade> getTrades();
+    Collection<Trade> getTrades();
 }

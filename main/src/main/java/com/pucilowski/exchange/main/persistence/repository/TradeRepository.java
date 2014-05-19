@@ -20,5 +20,5 @@ public interface TradeRepository extends CrudRepository<Trade, Long> {
     //@Query("SELECT t FROM Trade t JOIN t.market m WHERE m.id = ?1 ORDER BY t.time DESC")
     @Query("SELECT t FROM Trade t JOIN t.market m " +
             "WHERE m.id = ?1 ORDER BY t.executed DESC")
-    Collection<Trade> getTradeByMarket(CurrencyPair id);
+    Collection<Trade> getTrades(CurrencyPair id);
 }

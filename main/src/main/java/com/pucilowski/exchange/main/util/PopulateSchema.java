@@ -1,12 +1,15 @@
 package com.pucilowski.exchange.main.util;
 
+import com.pucilowski.exchange.main.ServletInitializer;
 import com.pucilowski.exchange.main.persistence.entity.Currency;
 import com.pucilowski.exchange.main.persistence.entity.Market;
 import com.pucilowski.exchange.main.persistence.entity.id.CurrencyPair;
 import com.pucilowski.exchange.main.persistence.repository.CurrencyRepository;
 import com.pucilowski.exchange.main.persistence.repository.MarketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -42,7 +45,10 @@ public class PopulateSchema {
     }
 
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("src/main/webapp/WEB-INF/spring/applicationContext*.xml");
+
+        ConfigurableApplicationContext context =
+                SpringApplication.run(ServletInitializer.class, args);
+
         PopulateSchema p = (PopulateSchema) context.getBean("populateSchema");
 
         p.populateCurrencies();

@@ -12,7 +12,7 @@
     <modules>
         <module>main</module>
         <module>matcher</module>
-        <module>integration</module>
+        <module>matcher/integration</module>
         <module>common</module>
         <module>api-common</module>
     </modules>
