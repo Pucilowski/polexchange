@@ -3,17 +3,20 @@ API
 
 RESTful HTTP API
 
-* `/api`
-    * `/markets`
-        * `GET /` returns tradable currency pair markets
-        * `GET /<base>/<counter>/bids/` returns bid orders
-        * `GET /<base>/<counter>/asks/` returns ask orders
-        * `GET /<base>/<counter>/history/` return trade history
-    * `/user`
-        * `GET /orders/` returns user's orders
-        * `POST /orders/` requests order to be submitted
-        * `DELETE /orders/<id>/` requests order to be cancelled
-        * `GET /trades/` returns user's trade history
+* `/api/`
+    * `markets/`
+        * `GET` returns tradable currency pair markets
+        * `<base>/<counter>/`
+            * `GET bids/` returns bid orders
+            * `GET asks/` returns ask orders
+            * `GET history/` return trade history
+    * `user/`        
+        * `orders/`
+            * `GET` returns user's orders
+            * `POST` requests order to be submitted
+            * `DELETE <id>/` requests order to be cancelled
+        * `trades/`
+            * `GET` returns user's trade history
             
 market activity websocket endpoints
 
