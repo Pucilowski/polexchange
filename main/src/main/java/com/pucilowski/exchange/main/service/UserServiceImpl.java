@@ -1,8 +1,8 @@
 package com.pucilowski.exchange.main.service;
 
-import com.pucilowski.exchange.matcher.integration.client.MatcherClient;
-import com.pucilowski.exchange.main.web.api.request.CancelOrder;
-import com.pucilowski.exchange.main.web.api.request.SubmitOrder;
+
+import com.pucilowski.exchange.common.enums.OrderStatus;
+import com.pucilowski.exchange.integration.service.client.MatcherClient;
 import com.pucilowski.exchange.main.persistence.entity.Currency;
 import com.pucilowski.exchange.main.persistence.entity.Market;
 import com.pucilowski.exchange.main.persistence.entity.Order;
@@ -10,7 +10,8 @@ import com.pucilowski.exchange.main.persistence.entity.Trade;
 import com.pucilowski.exchange.main.persistence.entity.id.CurrencyPair;
 import com.pucilowski.exchange.main.persistence.repository.OrderRepository;
 import com.pucilowski.exchange.main.persistence.repository.TradeRepository;
-import com.pucilowski.exchange.common.enums.OrderStatus;
+import com.pucilowski.exchange.main.web.api.request.CancelOrder;
+import com.pucilowski.exchange.main.web.api.request.SubmitOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
