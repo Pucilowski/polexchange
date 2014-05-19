@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
         order.quantity = dto.getQuantity();
         order.remaining = dto.getQuantity();
         order.status = OrderStatus.OPEN;
-        order.submitted = new Date();
+        order.opened = new Date();
         orderRepository.save(order);
 
 
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
     public void cancelOrder(Long id) {
         Order o = orderRepository.findOne(id);
 
-        o.setStatus(OrderStatus.PENDING_CANCEL);
+        o.setStatus(OrderStatus.CANCELLING);
 
         orderRepository.save(o);
 

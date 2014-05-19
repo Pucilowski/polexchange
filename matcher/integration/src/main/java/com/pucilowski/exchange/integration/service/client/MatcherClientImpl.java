@@ -29,8 +29,7 @@ public class MatcherClientImpl implements MatcherClient {
     RabbitAdmin rabbitAdmin;
     @Autowired
     RabbitTemplate rabbitTemplate;
-    //@Autowired
-    //TradeService tradeService;
+
     @Autowired
     TradeListener tradeListener;
 

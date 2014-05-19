@@ -47,13 +47,13 @@ public class Order {
     @Basic(optional = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Column(insertable = false, updatable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP")
-    public Date submitted = null;
+    public Date opened = null;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    /*@Column(updatable = false)*/
+    public Date closed = null;
 
     public Order() {
-    }
-
-    public Order(long id) {
-        this.id=id;
     }
 
     public Long getId() {
@@ -88,20 +88,20 @@ public class Order {
         this.side = side;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public int getPrice() {
         return price;
     }
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public int getRemaining() {
@@ -120,12 +120,20 @@ public class Order {
         this.status = status;
     }
 
-    public Date getSubmitted() {
-        return submitted;
+    public Date getOpened() {
+        return opened;
     }
 
-    public void setSubmitted(Date submitted) {
-        this.submitted = submitted;
+    public void setOpened(Date opened) {
+        this.opened = opened;
+    }
+
+    public Date getClosed() {
+        return closed;
+    }
+
+    public void setClosed(Date closed) {
+        this.closed = closed;
     }
 
     @Override

@@ -31,15 +31,13 @@ public class MarketApiController {
     public MarketDTO getMarket(@PathVariable String base, @PathVariable String counter) {
         base = base.toUpperCase();
         counter = counter.toUpperCase();
-
-        return marketService.getMarket(base,counter);
+        return marketService.getMarket(base, counter);
     }
 
     @RequestMapping(value = "/{base}/{counter}/bids/")
     public Collection<MarketOrder> getBids(@PathVariable String base, @PathVariable String counter) {
         base = base.toUpperCase();
         counter = counter.toUpperCase();
-
         return marketService.getBids(base, counter);
     }
 
@@ -47,7 +45,6 @@ public class MarketApiController {
     public Collection<MarketOrder> getAsks(@PathVariable String base, @PathVariable String counter) {
         base = base.toUpperCase();
         counter = counter.toUpperCase();
-
         return marketService.getAsks(base, counter);
     }
 
@@ -55,7 +52,6 @@ public class MarketApiController {
     public Collection<MarketTrade> getHistory(@PathVariable String base, @PathVariable String counter) {
         base = base.toUpperCase();
         counter = counter.toUpperCase();
-
         return marketService.getHistory(base, counter);
     }
 }

@@ -11,6 +11,7 @@ import com.pucilowski.exchange.main.persistence.repository.TradeRepository;
 import com.pucilowski.exchange.main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -33,6 +34,7 @@ public class TradeListenerImpl implements TradeListener {
 
     //TODO do it with less queries
     @Override
+    @Transactional //TODO check if the message pull and database ops are atomic
     public void tradeExecuted(TradeExecuted trade) {
         System.out.println("In: " + trade);
 
@@ -40,15 +42,21 @@ public class TradeListenerImpl implements TradeListener {
         Order ask = orderRepository.findOne(trade.getAskOrderId());
 
         bid.setRemaining(bid.getRemaining() - trade.getQuantity());
-        if (bid.getRemaining() == 0) bid.setStatus(OrderStatus.COMPLETE);
+        if (bid.getRemaining() == 0) {
+            bid.setStatus(OrderStatus.FULFILLED);
+            bid.setClosed(new Date());
+        }
 
         ask.setRemaining(ask.getRemaining() - trade.getQuantity());
-        if (ask.getRemaining() == 0) ask.setStatus(OrderStatus.COMPLETE);
+        if (ask.getRemaining() == 0) {
+            ask.setStatus(OrderStatus.FULFILLED);
+            ask.setClosed(new Date());
+        }
 
         orderRepository.save(Arrays.asList(bid, ask));
 
 
-        OrderSide side = bid.getSubmitted().after(ask.getSubmitted()) ? OrderSide.BID : OrderSide.ASK;
+        OrderSide side = bid.getOpened().after(ask.getOpened()) ? OrderSide.BID : OrderSide.ASK;
 
         Trade t = new Trade();
         t.setMarket(bid.getMarket());
@@ -59,5 +67,16 @@ public class TradeListenerImpl implements TradeListener {
         t.setQuantity(trade.getQuantity());
         t.setExecuted(new Date());
         tradeRepository.save(t);
+    }
+
+    //@Override
+    public void orderCancelledConfirmation(Long id) {
+        System.out.println("In: cancelling #" + id);
+
+        Order order = orderRepository.findOne(id);
+        order.setStatus(OrderStatus.CANCELLED);
+        order.setClosed(new Date());
+
+        orderRepository.save(order);
     }
 }

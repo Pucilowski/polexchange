@@ -56,14 +56,14 @@ public class MarketServiceImpl implements MarketService {
     @Override
     public Collection<MarketOrder> getBids(String base, String counter) {
         CurrencyPair pair = Converters.toCurrency(base, counter);
-        ArrayList<Order> orders = orderRepository.getOpenBidOrders(pair);
+        ArrayList<Order> orders = orderRepository.getOpenBids(pair);
         return convertOrders(orders);
     }
 
     @Override
     public Collection<MarketOrder> getAsks(String base, String counter) {
         CurrencyPair pair = Converters.toCurrency(base, counter);
-        ArrayList<Order> orders = orderRepository.getOpenAskOrders(pair);
+        ArrayList<Order> orders = orderRepository.getOpenAsks(pair);
         return convertOrders(orders);
     }
 

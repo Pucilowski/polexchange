@@ -4,7 +4,6 @@ import com.pucilowski.exchange.api.user.request.SubmitOrder;
 import com.pucilowski.exchange.integration.model.in.OrderSubmitted;
 import com.pucilowski.exchange.main.persistence.entity.Order;
 import com.pucilowski.exchange.main.persistence.entity.Trade;
-import com.pucilowski.exchange.main.service.MarketService;
 import com.pucilowski.exchange.main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,28 +21,22 @@ public class UserApiController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    MarketService marketService;
-
-    @RequestMapping(value = "/orders", method = RequestMethod.GET)
+    @RequestMapping(value = "/orders/", method = RequestMethod.GET)
     public Collection<Order> getOrders() {
-        //userService.submitOrder(order);
-
         return userService.getOrders();
     }
 
-    @RequestMapping(value = "/orders", method = RequestMethod.POST)
+    @RequestMapping(value = "/orders/", method = RequestMethod.POST)
     public OrderSubmitted submitOrder(@RequestBody SubmitOrder order) {
         return userService.submitOrder(order);
     }
 
-    @RequestMapping(value = "/orders/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/orders/{id}/", method = RequestMethod.DELETE)
     public void cancelOrder(@PathVariable Long id) {
-
         userService.cancelOrder(id);
     }
 
-    @RequestMapping(value = "/trades", method = RequestMethod.GET)
+    @RequestMapping(value = "/trades/", method = RequestMethod.GET)
     public Collection<Trade> getTrades() {
         return userService.getTrades();
     }
