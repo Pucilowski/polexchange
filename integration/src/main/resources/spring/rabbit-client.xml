@@ -14,7 +14,7 @@
 
     <rabbit:template id="matcherRabbit" connection-factory="connectionFactory"
                      message-converter="jsonMessageConverter"
-                     exchange="orders" routing-key="foo.bar"/>
+                     exchange="${exchange.name}" />
 
     <!--    <rabbit:admin connection-factory="connectionFactory" />
 
@@ -26,10 +26,12 @@
             </rabbit:bindings>
         </rabbit:topic-exchange>-->
 
-    <bean id="tradeListener" class="com.pucilowski.exchange.integration.service.client.TradeListenerImpl"/>
+    <!--<bean id="tradeListener" class="com.pucilowski.exchange.integration.service.impl.TradeListenerPrinter"/>-->
     <rabbit:listener-container connection-factory="connectionFactory" message-converter="jsonMessageConverter">
         <rabbit:listener ref="tradeListener" method="tradeExecuted" queue-names="trade.executed"/>
     </rabbit:listener-container>
+
+
 
 
 </beans>

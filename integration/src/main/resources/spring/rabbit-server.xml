@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-    Application context definition for PetClinic Datasource.
--->
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:rabbit="http://www.springframework.org/schema/rabbit"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
@@ -12,9 +9,10 @@
     <!-- ========================= DATASOURCE DEFINITION ========================= -->
     <import resource="rabbit-common.xml"/>
 
+
     <rabbit:template id="matcherRabbit" connection-factory="connectionFactory"
                      message-converter="jsonMessageConverter"
-                     exchange="${exchange.name}" routing-key="foo.bar"/>
+                     exchange="${exchange.name}" />
 
     <!--    <rabbit:admin connection-factory="connectionFactory" />
 
@@ -26,11 +24,11 @@
             </rabbit:bindings>
         </rabbit:topic-exchange>-->
 
-    <!--<bean id="orderListener" class="com.pucilowski.exchange.matcher.integration.service.OrderListenerImpl"/>-->
+    <!--<bean id="orderListener" class="com.pucilowski.exchange.integration.service.OrderListenerImpl"/>-->
     <rabbit:listener-container connection-factory="connectionFactory" message-converter="jsonMessageConverter">
-        <rabbit:listener ref="orderListenerImpl" method="orderSubmitted"
+        <rabbit:listener ref="orderListener" method="orderSubmitted"
                          queue-names="order.submitted.${market.base}.${market.counter}"/>
-        <rabbit:listener ref="orderListenerImpl" method="orderCancelled"
+        <rabbit:listener ref="orderListener" method="orderCancelled"
                          queue-names="order.cancelled.${market.base}.${market.counter}"/>
     </rabbit:listener-container>
 

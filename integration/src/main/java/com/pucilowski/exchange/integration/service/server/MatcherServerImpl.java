@@ -34,9 +34,6 @@ public class MatcherServerImpl implements MatcherServer {
     @Autowired
     RabbitTemplate rabbitTemplate;
 
-    @Autowired
-    OrderListener orderListener;
-
     @Override
     public void tradeExecuted(TradeExecuted trade) {
         Exchange e = new DirectExchange(exchangeName);
@@ -49,7 +46,7 @@ public class MatcherServerImpl implements MatcherServer {
         rabbitTemplate.setQueue(executedQueue);
         //rabbit.setRoutingKey(sb.toString());
 
-        //System.out.println("Sending to : " + queueName);
+        System.out.println("Sending " + trade + " to " + executedQueue);
         rabbitTemplate.convertAndSend(executedQueue, trade);
     }
 }

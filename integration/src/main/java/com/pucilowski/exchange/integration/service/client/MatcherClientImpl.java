@@ -49,7 +49,7 @@ public class MatcherClientImpl implements MatcherClient {
         rabbitTemplate.setQueue(queueName);
         //rabbit.setRoutingKey(sb.toString());
 
-        //System.out.println("Sending to : " + queueName);
+        System.out.println("Sending " + order + " to " + queueName);
         rabbitTemplate.convertAndSend(queueName, order);
     }
 
@@ -68,12 +68,9 @@ public class MatcherClientImpl implements MatcherClient {
         rabbitTemplate.setQueue(queueName);
         //rabbit.setRoutingKey(sb.toString());
 
-        //System.out.println("Sending to : " + queueName);
+        System.out.println("Sending " + order + " to " + queueName);
         rabbitTemplate.convertAndSend(queueName, order);
     }
-
-
-
 
 
 }

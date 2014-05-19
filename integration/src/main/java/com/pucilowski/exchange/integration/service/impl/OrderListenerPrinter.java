@@ -1,15 +1,16 @@
-package com.pucilowski.exchange.integration.service.server;
+package com.pucilowski.exchange.integration.service.impl;
 
 import com.pucilowski.exchange.integration.model.in.OrderCancelled;
 import com.pucilowski.exchange.integration.model.in.OrderSubmitted;
+import com.pucilowski.exchange.integration.service.server.OrderListener;
 import org.springframework.stereotype.Service;
 
 /**
  * Created by martin on 18/05/14.
  */
 
-@Service
-public class OrderListenerImpl implements OrderListener {
+//@Service
+public class OrderListenerPrinter implements OrderListener {
     @Override
     public void orderSubmitted(OrderSubmitted order) {
         System.out.println("Order submitted: " + order);

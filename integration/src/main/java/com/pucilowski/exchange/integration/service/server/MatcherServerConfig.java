@@ -1,10 +1,8 @@
 package com.pucilowski.exchange.integration.service.server;
 
 import com.pucilowski.exchange.integration.service.MatcherSharedConfig;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.ImportResource;
+import com.pucilowski.exchange.integration.service.impl.OrderListenerPrinter;
+import org.springframework.context.annotation.*;
 
 /**
  * Created by martin on 18/05/14.

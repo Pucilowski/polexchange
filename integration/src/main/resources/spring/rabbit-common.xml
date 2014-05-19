@@ -18,9 +18,9 @@
 
     <rabbit:admin connection-factory="connectionFactory"/>
 
-    <rabbit:direct-exchange name="${exchange.name}">
+    <!--<rabbit:direct-exchange name="${exchange.name}">
 
-    </rabbit:direct-exchange>
+    </rabbit:direct-exchange>-->
 <!--    <rabbit:topic-exchange name="${exchange.name}">
         &lt;!&ndash;<rabbit:bindings>
             <rabbit:binding queue="trade.exchange" pattern="trade.exchange" />
@@ -44,7 +44,7 @@
             </rabbit:bindings>
         </rabbit:topic-exchange>-->
 
-    <!--<bean id="orderListener" class="com.pucilowski.exchange.matcher.integration.service.OrderListenerImpl"/>-->
+    <!--<bean id="orderListener" class="com.pucilowski.exchange.integration.service.OrderListenerImpl"/>-->
 
 
 </beans>

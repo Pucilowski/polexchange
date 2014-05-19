@@ -1,6 +1,7 @@
-package com.pucilowski.exchange.integration.service.client;
+package com.pucilowski.exchange.integration.service.impl;
 
 import com.pucilowski.exchange.integration.model.out.TradeExecuted;
+import com.pucilowski.exchange.integration.service.client.TradeListener;
 import org.springframework.stereotype.Service;
 
 /**
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class TradeListenerImpl implements TradeListener {
+public class TradeListenerPrinter implements TradeListener {
     @Override
     public void tradeExecuted(TradeExecuted trade) {
         System.out.println("Trade executed: " + trade);

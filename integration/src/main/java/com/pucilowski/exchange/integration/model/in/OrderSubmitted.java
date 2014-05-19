@@ -44,4 +44,14 @@ public class OrderSubmitted {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "OrderSubmitted{" +
+                "id=" + id +
+                ", side=" + side +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
+    }
 }
