@@ -1,9 +1,9 @@
 package com.pucilowski.exchange.matcher;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.annotation.PropertySource;
+import com.pucilowski.exchange.integration.service.server.MatcherServerConfig;
+import com.pucilowski.exchange.integration.service.server.OrderListener;
+import com.pucilowski.exchange.matcher.service.OrderListenerImpl;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 /**
@@ -11,8 +11,9 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
  */
 
 @Configuration
-@ImportResource("classpath:META-INF/spring/matcherContext.xml")
-//@Import(MatcherServerConfig.class)
+@ComponentScan(basePackages = "com.pucilowski.exchange.matcher.service")
+/*@ImportResource("classpath:META-INF/spring/matcherContext.xml")*/
+@Import(MatcherServerConfig.class)
 @PropertySource("classpath:config/market.properties")
 public class MatcherConfig {
 
@@ -21,4 +22,9 @@ public class MatcherConfig {
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
     }
+
+/*    @Bean
+    public OrderListener orderListener() {
+        return new OrderListenerImpl();
+    }*/
 }

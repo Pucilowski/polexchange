@@ -1,11 +1,16 @@
 package com.pucilowski.exchange.matcher.service;
 
 import com.pucilowski.exchange.common.enums.OrderSide;
+import com.pucilowski.exchange.integration.model.out.TradeExecuted;
 import com.pucilowski.exchange.integration.service.server.MatcherServer;
-import com.pucilowski.exchange.matcher.model.Order;
-import com.pucilowski.exchange.matcher.model.BookSide;
+import com.pucilowski.exchange.matcher.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.text.DecimalFormat;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by martin on 18/05/14.
@@ -14,45 +19,87 @@ import org.springframework.stereotype.Service;
 @Service
 public class MatcherImpl implements Matcher {
 
-    final BookSide bids;
-    final BookSide asks;
+    public final BookSide.Bids bids;
+    public final BookSide.Asks asks;
 
     @Autowired
+    public
     MatcherServer matcherServer;
 
     public MatcherImpl() {
-        bids = new BookSide(OrderSide.BID);
-        asks = new BookSide(OrderSide.ASK);
+        bids = new BookSide.Bids();
+        asks = new BookSide.Asks();
     }
 
     @Override
-    public void inputOrder(Order pending) {
-        BookSide bookSide = getBook(pending);
-        BookSide counterBookSide = getCounterBook(pending);
+    public void inputOrder(Order input) {
+        if (input == null) return;
 
-        if (pending.side == OrderSide.BID && pending.price < bookSide.best) {
-            bookSide.push(pending);
+        BookSide book = getBook(input);
+        BookSide counterBook = getCounterBook(input);
+
+        if (input.getSide() == OrderSide.BID && input.getPrice() < asks.bestAsk()) {
+            bids.insert(input);
             return;
-        } else if (pending.side == OrderSide.ASK && pending.price > bookSide.best) {
-            bookSide.push(pending);
+        } else if (input.getSide() == OrderSide.ASK && input.getPrice() > bids.bestBid()) {
+            asks.insert(input);
             return;
         }
 
+        while (input.getRemaining() > 0) {
+            Order counter = counterBook.bestOffer(input.getPrice());
+            if (counter == null) break;
 
-        while (pending.remaining > 0) {
-            Order o = counterBookSide.peek();
-            int maxQ = Math.min(pending.quantity, o.quantity);
+            int tradePrice = counter.getPrice();
+            int tradeVolume = Math.min(input.getRemaining(), counter.getRemaining());
+
+            Order bidOrder = input.getSide() == OrderSide.BID ? input : counter;
+            Order askOrder = input.getSide() == OrderSide.ASK ? input : counter;
+            Trade trade = new Trade(bidOrder, askOrder, tradePrice, tradeVolume);
+
+            input.takeRemaining(tradeVolume);
+            counter.takeRemaining(tradeVolume);
+
+            if (counter.getRemaining() == 0) {
+                counterBook.removeBestOrder();
+            }
+
+            executeTrade(trade);
         }
 
-        //orderBook.add(pending);
-        //boolean bestOffer = orderBook.add(pending)==0;
+        if (input.getRemaining() > 0) {
+            book.insert(input);
+        } else {
+            closeOrder(input);
+        }
+
+        //orderBook.add(input);
+        //boolean bestOffer = orderBook.add(input)==0;
 
         //matcherServer.tradeExecuted(null);
     }
 
+
+
+    public void executeTrade(Trade trade) {
+        TradeExecuted t = new TradeExecuted();
+
+        t.setBidOrderId(trade.bidOrder.getId());
+        t.setAskOrderId(trade.askOrder.getId());
+        t.setPrice(trade.price);
+        t.setQuantity(trade.quantity);
+
+        System.out.println("Out: " + trade);
+        matcherServer.tradeExecuted(t);
+    }
+
+    public void closeOrder(Order order) {
+
+    }
+
     @Override
     public void cancelOrder(long id) {
-
+        System.out.println("Cancelling order: " + id);
     }
 
     public BookSide getBook(Order order) {

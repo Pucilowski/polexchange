@@ -1,6 +1,5 @@
 package com.pucilowski.exchange.matcher.model;
 
-import com.pucilowski.exchange.common.enums.OrderSide;
 import org.junit.Test;
 
 /**
@@ -10,7 +9,7 @@ public class BookSideTest {
 
     @Test
     public void orderTest() {
-        BookSide side = new BookSide(OrderSide.BID);
+        BookSide side = new BookSide.Bids();
 
 
 

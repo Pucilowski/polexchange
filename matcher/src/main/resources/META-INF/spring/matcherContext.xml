@@ -11,12 +11,12 @@
     then be used within application context files in the form of
     ${propertyKey}.
     -->
-    <context:property-placeholder location="classpath*:META-INF/spring/*.properties"/>
+    <!--<context:property-placeholder location="classpath*:META-INF/spring/*.properties"/>-->
 
 
 
     <!--<context:annotation-config/>-->
-    <context:component-scan base-package="com.pucilowski.exchange.matcher"/>
+    <!--<context:component-scan base-package="com.pucilowski.exchange.matcher"/>-->
 
 
 </beans>

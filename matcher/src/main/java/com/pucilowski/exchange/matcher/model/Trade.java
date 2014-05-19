@@ -5,10 +5,16 @@ package com.pucilowski.exchange.matcher.model;
  */
 public class Trade {
 
-    Order bidOrder;
-    Order sellOrder;
+    public final Order bidOrder;
+    public final Order askOrder;
 
-    public int price;
-    public int quantity;
+    public final int price;
+    public final int quantity;
 
+    public Trade(Order bidOrder, Order askOrder, int price, int quantity) {
+        this.bidOrder = bidOrder;
+        this.askOrder = askOrder;
+        this.price = price;
+        this.quantity = quantity;
+    }
 }

@@ -1,10 +1,7 @@
 package com.pucilowski.exchange.matcher;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Component;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,11 +11,7 @@ import org.springframework.stereotype.Component;
  * To change this template use File | Settings | File Templates.
  */
 
-@Component
 public class Run {
-
-
-
     public static void main(String[] args) {
         //book = new MarketMatcher();
 
@@ -29,8 +22,8 @@ public class Run {
                 SpringApplication.run(MatcherConfig.class, args);
 
 
-
-
+        //OrderListener listener = context.getBean(OrderListener.class);
+        //Matcher matcher = context.getBean(Matcher.class);
 
     }
 

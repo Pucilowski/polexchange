@@ -16,7 +16,7 @@ public class BookSide {
 
     private final OrderSide side;
 
-    TreeMap<Integer, PriceLevel> level = new TreeMap<>(new Comparator<Integer>() {
+    TreeMap<Integer, PriceLevel> levels = new TreeMap<>(new Comparator<Integer>() {
         @Override
         public int compare(Integer o1, Integer o2) {
             int diff = o1 - o2;
@@ -25,47 +25,91 @@ public class BookSide {
         }
     });
 
-    public int best;
 
-    public BookSide(OrderSide side) {
+    private BookSide(OrderSide side) {
         this.side = side;
     }
 
-    public void push(Order o) {
-        if (level.containsKey(o.price)) {
-            level.get(o.price).push(o);
-        } else {
-            level.put(o.price, new PriceLevel(o));
-        }
+    private int best;
 
-        best = o.price;
+    protected int getBest() {
+        Order best = getBestOrder();
+        if (best == null) return -1;
+        return best.getPrice();
     }
 
-    public Order pop() {
-        if (level.isEmpty()) return null;
+    public Order bestOffer(int price) {
+        Order o = getBestOrder();
+        if (o == null) return null;
 
-        Map.Entry<Integer, PriceLevel> topPriceLevel = level.pollFirstEntry();
-        PriceLevel topOrders = topPriceLevel.getValue();
+        if (satisfies(price, o.getPrice()))
+            return o;
 
-        if (topOrders.isEmpty()) return null;
-        Order top = topOrders.pop();
+        return null;
+    }
 
-        if (topOrders.isEmpty()) {
-            level.remove(topPriceLevel.getKey());
-            best = level.pollFirstEntry().getKey();
+    public boolean satisfies(int offer, int offer2) {
+        return side == OrderSide.BID ? offer >= offer2 : offer2 <= offer;
+    }
+
+    public void insert(Order o) {
+        if (levels.containsKey(o.price)) {
+            levels.get(o.price).insert(o);
+        } else {
+            levels.put(o.price, new PriceLevel(o));
+        }
+
+        //best = o.price;
+    }
+
+    public Order removeBestOrder() {
+        if (levels.isEmpty()) return null;
+
+        PriceLevel bestLevel = levels.firstEntry().getValue();
+
+        Order top = bestLevel.removeOldest();
+        if (bestLevel.isEmpty()) {
+            levels.pollFirstEntry();
         }
         return top;
     }
 
-    public Order peek() {
-        if (level.isEmpty()) return null;
+    public Order getBestOrder() {
+        if (levels.isEmpty()) return null;
 
-        Map.Entry<Integer, PriceLevel> topPriceLevel = level.pollFirstEntry();
-        PriceLevel topOrders = topPriceLevel.getValue();
+        PriceLevel bestLevel = levels.firstEntry().getValue();
 
-        if (topOrders.isEmpty()) return null;
-        return topOrders.peek();
+        if (bestLevel.isEmpty()) return null;
+        return bestLevel.getOldest();
     }
+
+    public Map<Integer, List<Integer>> getBook() {
+        Map<Integer, List<Integer>> book= new LinkedHashMap<>();
+
+        for(PriceLevel level : levels.values()) {
+            List<Integer> volumes = new ArrayList<>();
+
+            LinkedList<Order> orders = level.orders;
+            for (Order order : orders) {
+                volumes.add(order.getRemaining());
+            }
+
+            book.put(level.price, volumes);
+        }
+
+        return book;
+    }
+
+    public void dumpString() {
+        for(PriceLevel level : levels.values()) {
+            System.out.println("Price: " + level.price);
+            for(Order order : level.orders) {
+                System.out.println("\t"+order.getRemaining() + " @ " + order.getPrice());
+            }
+        }
+    }
+
+
 
     private class PriceLevel {
         private final int price;
@@ -73,22 +117,23 @@ public class BookSide {
 
         public PriceLevel(Order order) {
             price = order.price;
+            orders.push(order);
         }
 
         public boolean isEmpty() {
             return orders.isEmpty();
         }
 
-        public void push(Order o) {
-            orders.push(o);
+        public void insert(Order o) {
+            orders.addLast(o);
         }
 
-        public Order pop() {
-            return orders.pop();
+        public Order removeOldest() {
+            return orders.pollFirst();
         }
 
-        public Order peek() {
-            return orders.peek();
+        public Order getOldest() {
+            return orders.peekFirst();
         }
 
         @Override
@@ -105,6 +150,29 @@ public class BookSide {
         public int hashCode() {
             return price;
         }
+
+        public int size() {
+            return orders.size();
+        }
     }
 
+    public static class Bids extends BookSide {
+        public Bids() {
+            super(OrderSide.BID);
+        }
+
+        public int bestBid() {
+            return getBest();
+        }
+    }
+
+    public static class Asks extends BookSide {
+        public Asks() {
+            super(OrderSide.ASK);
+        }
+
+        public int bestAsk() {
+            return getBest();
+        }
+    }
 }
