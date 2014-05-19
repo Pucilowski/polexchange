@@ -1,7 +1,6 @@
-package com.pucilowski.exchange.main.web.api.response.world;
+package com.pucilowski.exchange.api.response;
 
 import com.pucilowski.exchange.common.enums.OrderSide;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import java.util.Date;
 
@@ -9,7 +8,7 @@ import java.util.Date;
  * Created by martin on 06/02/14.
  */
 
-@JsonAutoDetect
+//@JsonAutoDetect
 public class TradeDTO {
 
     private OrderSide side;

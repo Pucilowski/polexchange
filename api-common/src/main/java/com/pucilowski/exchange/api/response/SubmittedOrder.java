@@ -1,8 +1,8 @@
-package com.pucilowski.exchange.main.web.api.response;
+package com.pucilowski.exchange.api.response;
 
 import com.pucilowski.exchange.common.enums.OrderSide;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.core.JsonProcessingException;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Created by martin on 20/01/14.
@@ -15,7 +15,7 @@ public class SubmittedOrder {
     public int price;
     public int quantity;
 
-    @Override
+/*    @Override
     public String toString() {
         ObjectMapper om = new ObjectMapper();
         try {
@@ -24,5 +24,5 @@ public class SubmittedOrder {
             e.printStackTrace();
         }
         return "null";
-    }
+    }*/
 }

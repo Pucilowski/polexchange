@@ -1,12 +1,12 @@
-package com.pucilowski.exchange.main.web.api.response.world;
+package com.pucilowski.exchange.api.response;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+//import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 /**
  * Created by martin on 06/02/14.
  */
 
-@JsonAutoDetect
+//@JsonAutoDetect
 
 public class MarketDTO {
 

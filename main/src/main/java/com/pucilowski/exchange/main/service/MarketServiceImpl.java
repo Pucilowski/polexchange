@@ -1,9 +1,9 @@
 package com.pucilowski.exchange.main.service;
 
-import com.pucilowski.exchange.main.web.api.response.world.MarketDTO;
-import com.pucilowski.exchange.main.web.api.response.world.OrderDTO;
-import com.pucilowski.exchange.main.web.api.response.world.OrderbookDTO;
-import com.pucilowski.exchange.main.web.api.response.world.TradeDTO;
+import com.pucilowski.exchange.api.response.MarketDTO;
+import com.pucilowski.exchange.api.response.OrderDTO;
+import com.pucilowski.exchange.api.response.OrderbookDTO;
+import com.pucilowski.exchange.api.response.TradeDTO;
 import com.pucilowski.exchange.main.persistence.entity.Currency;
 import com.pucilowski.exchange.main.persistence.entity.Market;
 import com.pucilowski.exchange.main.persistence.entity.Order;

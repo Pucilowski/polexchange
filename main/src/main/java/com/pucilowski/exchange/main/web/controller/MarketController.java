@@ -2,7 +2,7 @@ package com.pucilowski.exchange.main.web.controller;
 
 import com.pucilowski.exchange.main.service.MarketService;
 import com.pucilowski.exchange.main.service.UserService;
-import com.pucilowski.exchange.main.web.api.response.world.MarketDTO;
+import com.pucilowski.exchange.api.response.MarketDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

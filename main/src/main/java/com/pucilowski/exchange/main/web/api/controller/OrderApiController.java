@@ -1,7 +1,7 @@
 package com.pucilowski.exchange.main.web.api.controller;
 
-import com.pucilowski.exchange.main.web.api.request.CancelOrder;
-import com.pucilowski.exchange.main.web.api.request.SubmitOrder;
+import com.pucilowski.exchange.api.request.CancelOrder;
+import com.pucilowski.exchange.api.request.SubmitOrder;
 import com.pucilowski.exchange.main.service.MarketService;
 import com.pucilowski.exchange.main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

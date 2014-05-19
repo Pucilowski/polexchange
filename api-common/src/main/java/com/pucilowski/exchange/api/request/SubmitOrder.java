@@ -1,14 +1,13 @@
-package com.pucilowski.exchange.main.web.api.request;
+package com.pucilowski.exchange.api.request;
 
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.pucilowski.exchange.common.enums.OrderSide;
 
 /**
  * Created by Martin on 29/01/14.
  */
 
-@JsonAutoDetect
+//@JsonAutoDetect
 public class SubmitOrder {
 
     private String base;

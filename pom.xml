@@ -14,6 +14,7 @@
         <module>matcher</module>
         <module>integration</module>
         <module>common</module>
+        <module>api-common</module>
     </modules>
 
     <properties>
@@ -45,6 +46,10 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+
+    </dependencies>
 
     <build>
         <plugins>

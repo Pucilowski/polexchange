@@ -1,6 +1,6 @@
-package com.pucilowski.exchange.main.web.api.response.world;
+package com.pucilowski.exchange.api.response;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+//import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
  * Created by martin on 06/02/14.
  */
 
-@JsonAutoDetect
+//@JsonAutoDetect
 public class OrderbookDTO {
 
     private List<OrderDTO> bids = new ArrayList<>();

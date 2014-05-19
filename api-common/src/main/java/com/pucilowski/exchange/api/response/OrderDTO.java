@@ -1,14 +1,10 @@
-package com.pucilowski.exchange.main.web.api.response.world;
-
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+package com.pucilowski.exchange.api.response;
 
 /**
  * Created by martin on 06/02/14.
  */
 
-@JsonAutoDetect
+//@JsonAutoDetect
 public class OrderDTO {
 
     private int price;
@@ -34,7 +30,7 @@ public class OrderDTO {
         this.quantity = quantity;
     }
 
-    @Override
+ /*   @Override
     public String toString() {
         ObjectMapper om = new ObjectMapper();
         try {
@@ -43,5 +39,5 @@ public class OrderDTO {
             e.printStackTrace();
         }
         return "null";
-    }
+    }*/
 }

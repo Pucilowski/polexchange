@@ -1,8 +1,8 @@
 package com.pucilowski.exchange.main.web.api.controller;
 
-import com.pucilowski.exchange.main.web.api.response.world.MarketDTO;
-import com.pucilowski.exchange.main.web.api.response.world.OrderbookDTO;
-import com.pucilowski.exchange.main.web.api.response.world.TradeDTO;
+import com.pucilowski.exchange.api.response.MarketDTO;
+import com.pucilowski.exchange.api.response.OrderbookDTO;
+import com.pucilowski.exchange.api.response.TradeDTO;
 import com.pucilowski.exchange.main.service.MarketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
