@@ -13,7 +13,7 @@
     <rabbit:connection-factory id="connectionFactory" host="localhost" username="guest" password="guest"/>
 
 
-    <context:property-placeholder location="classpath*:config/market.properties"/>
+    <!--<context:property-placeholder location="classpath*:config/matcher.properties"/>-->
 
 
     <rabbit:admin connection-factory="connectionFactory"/>

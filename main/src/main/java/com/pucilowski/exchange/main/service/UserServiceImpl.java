@@ -2,6 +2,7 @@ package com.pucilowski.exchange.main.service;
 
 
 import com.pucilowski.exchange.common.enums.OrderStatus;
+import com.pucilowski.exchange.integration.model.in.OrderSubmitted;
 import com.pucilowski.exchange.integration.service.client.MatcherClient;
 import com.pucilowski.exchange.main.persistence.entity.Currency;
 import com.pucilowski.exchange.main.persistence.entity.Market;
@@ -12,6 +13,7 @@ import com.pucilowski.exchange.main.persistence.repository.OrderRepository;
 import com.pucilowski.exchange.main.persistence.repository.TradeRepository;
 import com.pucilowski.exchange.api.request.CancelOrder;
 import com.pucilowski.exchange.api.request.SubmitOrder;
+import com.pucilowski.exchange.main.util.Converters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,21 +42,19 @@ public class UserServiceImpl implements UserService {
     public void submitOrder(SubmitOrder dto) {
         String base = dto.getBase();//.toLowerCase();
         String counter = dto.getCounter();//.toLowerCase();
-
+        CurrencyPair pair = Converters.toCurrency(base,counter);
 
         Order order = new Order();
 
         Market m = new Market();
-        m.setId(new CurrencyPair(new Currency(base), new Currency(counter)));
+        m.setId(pair);
 
         order.user = null; //get user from context
         order.market = m;
         order.side = dto.getSide();
-
         order.quantity = dto.getQuantity();
         order.price = dto.getPrice();
         order.remaining = dto.getQuantity();
-
         order.status = OrderStatus.PENDING;
         order.submitted = new Date();
 
@@ -62,14 +62,12 @@ public class UserServiceImpl implements UserService {
 
 
 
-     /*   SubmitOrder s = new SubmitOrder();
+        OrderSubmitted s = new OrderSubmitted();
         s.id = order.id;
         s.side = order.side;
         s.price = order.price;
-        s.quantity = order.quantity;*/
-
-        //messageQueue.submitOrder(base, counter, s);
-
+        s.quantity = order.quantity;
+        matcherClient.submitOrder(base, counter, s);
     }
 
     @Override

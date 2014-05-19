@@ -18,7 +18,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories
 public class RootConfig {
 
-    @Bean
+/*    @Bean
     public TradeListener tradeListener() {
         return new TradeListener() {
             @Override
@@ -26,6 +26,6 @@ public class RootConfig {
                 System.out.println("In: " + trade);
             }
         };
-    }
+    }*/
 
 }

@@ -46,7 +46,7 @@ public class MatcherServerImpl implements MatcherServer {
         rabbitTemplate.setQueue(executedQueue);
         //rabbit.setRoutingKey(sb.toString());
 
-        System.out.println("Sending " + trade + " to " + executedQueue);
+        System.out.println("Out: " + trade + " to " + executedQueue);
         rabbitTemplate.convertAndSend(executedQueue, trade);
     }
 }

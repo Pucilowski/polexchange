@@ -1,4 +1,4 @@
-package com.pucilowski.exchange.main.web.api.controller;
+package com.pucilowski.exchange.main.web.controller.api;
 
 import com.pucilowski.exchange.api.response.MarketDTO;
 import com.pucilowski.exchange.api.response.OrderbookDTO;

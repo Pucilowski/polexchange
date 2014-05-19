@@ -17,31 +17,93 @@ public class Trade {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    public Long id;
+    private Long id;
 
     @ManyToOne
-    public Market market;
+    private Market market;
 
     @Enumerated(EnumType.STRING)
-    public OrderSide side;
+    private OrderSide side;
 
     @ManyToOne
     //@JoinColumn(name="bid_order_id")
-    public Order bid;
+    private Order bidOrder;
 
     @ManyToOne
     //@JoinColumn(name="ask_order_id")
-    public Order ask;
+    private Order askOrder;
 
-
-
-    public int quantity;
-    public int price;
+    private int price;
+    private int quantity;
 
 
     @Temporal(TemporalType.TIMESTAMP)
-    public Date executed;
+    private Date executed;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Market getMarket() {
+        return market;
+    }
+
+    public void setMarket(Market market) {
+        this.market = market;
+    }
+
+    public OrderSide getSide() {
+        return side;
+    }
+
+    public void setSide(OrderSide side) {
+        this.side = side;
+    }
+
+    public Order getBidOrder() {
+        return bidOrder;
+    }
+
+    public void setBidOrder(Order bidOrder) {
+        this.bidOrder = bidOrder;
+    }
+
+    public Order getAskOrder() {
+        return askOrder;
+    }
+
+    public void setAskOrder(Order askOrder) {
+        this.askOrder = askOrder;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Date getExecuted() {
+        return executed;
+    }
+
+    public void setExecuted(Date executed) {
+        this.executed = executed;
+    }
 
     @Override
     public String toString() {

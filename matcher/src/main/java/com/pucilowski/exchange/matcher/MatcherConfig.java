@@ -14,7 +14,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @ComponentScan(basePackages = "com.pucilowski.exchange.matcher.service")
 /*@ImportResource("classpath:META-INF/spring/matcherContext.xml")*/
 @Import(MatcherServerConfig.class)
-@PropertySource("classpath:config/market.properties")
+@PropertySource("classpath:config/matcher.properties")
 public class MatcherConfig {
 
 

@@ -27,9 +27,9 @@
     <!--<bean id="orderListener" class="com.pucilowski.exchange.integration.service.OrderListenerImpl"/>-->
     <rabbit:listener-container connection-factory="connectionFactory" message-converter="jsonMessageConverter">
         <rabbit:listener ref="orderListener" method="orderSubmitted"
-                         queue-names="order.submitted.${market.base}.${market.counter}"/>
+                         queue-names="order.submitted.${matcher.base}.${matcher.counter}"/>
         <rabbit:listener ref="orderListener" method="orderCancelled"
-                         queue-names="order.cancelled.${market.base}.${market.counter}"/>
+                         queue-names="order.cancelled.${matcher.base}.${matcher.counter}"/>
     </rabbit:listener-container>
 
 
