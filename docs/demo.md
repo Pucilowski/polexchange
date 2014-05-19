@@ -3,8 +3,8 @@
 * from `main` module run `com.pucilowski.exchange.main.util.Cli`
 * from `matcher` module run `com.pucilowski.exchange.matcher.Matcher`
 * type following into Cli instance to submit orders
-	* bid <price> <volume>
-	* ask <price> <volume>
+	* `bid <price> <volume>`
+	* `ask <price> <volume>`
 * for results
     * api:
         * http://localhost:8080/api/markets/
