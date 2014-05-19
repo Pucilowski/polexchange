@@ -3,11 +3,20 @@ polexchange
 
 an attempt at a trading platform
 
-### instructions
+#### instructions
 
 to make it ever so slightly operational:
 
-* install rabbitmq-server
+##### dependencies
+
+```
+sudo apt-get install maven
+sudo apt-get install rabbitmq-server
+```
+
+##### run things
+
+* `mvn clean install` to satisfy dependencies
 * from `main` module run `com.pucilowski.exchange.main.util.PopulateSchema`, kill when populated
 * from `main` module run `com.pucilowski.exchange.main.util.Cli`
 * from `matcher` module run `com.pucilowski.exchange.matcher.Matcher`
