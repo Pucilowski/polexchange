@@ -1,10 +1,10 @@
 polexchange
 ===========
 
-A work in progress trading platform. The goal is to allow users can trade various currency pairs through
+A work in progress trading platform. The goal is to create a platform and let users trade various currency pairs by
 posting bid/ask offers to an orderbook, similar to forex markets and stock exchanges.
 
-The Matcher, responsible for determining when a trade can be struck is a discrete component. Multiple matchers can be ran, each one given responsibility of its own market. Communication between the matcher and world-API is done through RabbitMQ.
+The Matcher, responsible for determining when a trade can be struck is a discrete component. Multiple matchers are ran, each one given responsibility of its own market. Communication between the matcher and world-API is done through RabbitMQ.
 
 ### instructions
 
