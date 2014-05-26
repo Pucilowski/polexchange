@@ -1,7 +1,7 @@
 polexchange
 ===========
 
-Efforts to build an exchange platform. Asset pairs form markets, similar to Forex/ Stock exchanges. Exposes a web API to take orders and offer market snapshots. 'Matchers' take orders and strike trades, each tasked with its own market. RabbitMQ used for internal communication.
+Efforts to build an exchange platform. Asset pairs form markets, similar to Forex/ Stock exchanges. Exposes a web API to record orders and publish market snapshots. 'Matchers' take open orders and strike trades, each tasked with its own market. RabbitMQ used for internal communication.
 
 Each market features an [Order book](https://en.wikipedia.org/wiki/Order_book_(trading)) to record buyer/seller interest of participants. An order specifies the market it pertains to, whether it is a buy or sell order, quantity and offered price.
 
