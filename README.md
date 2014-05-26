@@ -11,8 +11,8 @@ Incoming orders are processed sequentially and when prices overlap and an agreem
 
 * Takes orders
 * Persists orders and informs matcher
-* Matcher receives ordesr and executes trades
-* Updates open orders and persists executed trades
+* Matcher receives orders and executes trades, pushes to queue
+* Executed trades from queue are persisted and open orders updated
 
 ### To-do
 
