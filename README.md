@@ -6,6 +6,10 @@ posting bid/ask offers to an orderbook, similar to forex markets and stock excha
 
 The Matcher, responsible for determining when a trade can be struck is a discrete component. Multiple matchers are ran, each one given responsibility of its own market. Communication between the matcher and world-API is done through RabbitMQ.
 
+###
+
+[Specification](https://github.com/Pucilowski/polexchange/blob/master/doc/spec.md) beginning to outline the structure and inner workings and intended integration mechanisms.
+
 ### instructions
 
 in order to get some operation out of it
