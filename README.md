@@ -1,40 +1,60 @@
 polexchange
 ===========
 
-A work in progress trading platform. The goal is to create a platform and let users trade various currency pairs by
-posting bid/ask offers to an orderbook, similar to forex markets and stock exchanges.
+Efforts to build an exchange platform. Asset pairs form markets, similar to Forex/ Stock exchanges. Exposes a web API to take orders and offer market snapshots. 'Matchers' take orders and strike trades, each tasked with its own market. RabbitMQ used for internal communication.
 
-The Matcher, responsible for determining when a trade can be struck is a discrete component. Multiple matchers are ran, each one given responsibility of its own market. Communication between the matcher and world-API is done through RabbitMQ.
+Each market features an [Order book](https://en.wikipedia.org/wiki/Order_book_(trading)) to record buyer/seller interest of participants. An order specifies the market it pertains to, whether it is a buy or sell order, quantity and offered price.
 
-###
+Incoming orders are processed sequentially and when prices overlap and an agreement between two parties can be struck a trade is executed.
 
-[Specification](https://github.com/Pucilowski/polexchange/blob/master/doc/spec.md) beginning to outline the structure and inner workings and intended integration mechanisms.
+### Features
 
-### instructions
+* Takes orders
+* Persists orders and informs matcher
+* Matcher receives ordesr and executes trades
+* Updates open orders and persists executed trades
 
-in order to get some operation out of it
+### To-do
 
-#### dependencies
+* User registration/authentication
+* Attribute order submissions to the authenticated user
+* Order cancellation requests (if possible)
+* User asset balances
+* Internal API for for user asset deposits/withdrawals (integration with external systems like fiat banking, Bitcoin)
+* Real-time websocket stream of newly posted orders and executed trades
+* Web front-end
+
+### Specification
+
+[Specification](https://github.com/Pucilowski/polexchange/blob/master/doc/spec.md) begins to outline the structure and inner workings and intended integration interfaces.
+
+### Instructions
+
+If you wish to witness some operation out of it
 
 ```
+# system dependencies
 sudo apt-get install maven
 sudo apt-get install rabbitmq-server
+# grab project
+git clone https://github.com/Pucilowski/polexchange.git
+cd polexchange
+mvn clean install
 ```
 
-#### run things
+#### Run
 
-* `mvn clean install` to satisfy dependencies
 * from `main` module run `com.pucilowski.exchange.main.util.PopulateSchema`, kill when populated
-* from `main` module run `com.pucilowski.exchange.main.util.Cli`
 * from `matcher` module run `com.pucilowski.exchange.matcher.Matcher`
-* type following into Cli instance to submit orders
-	* `bid <price> <volume>`
-	* `ask <price> <volume>`
+* from `main` module run `com.pucilowski.exchange.main.util.Cli`
+	* type following into standard input to submit orders
+		* `bid <price> <volume>`
+		* `ask <price> <volume>`
 * for results
     * api:
-        * http://localhost:8080/api/markets/
-        * http://localhost:8080/api/markets/ltc/btc/bids/
-        * http://localhost:8080/api/markets/ltc/btc/asks/
-        * http://localhost:8080/api/markets/ltc/btc/history/
+        * `http://localhost:8080/api/markets/`
+        * `http://localhost:8080/api/markets/ltc/btc/bids/`
+        * `http://localhost:8080/api/markets/ltc/btc/asks/`
+        * `http://localhost:8080/api/markets/ltc/btc/history/`
     * database entries:
         * store.script in working dir
