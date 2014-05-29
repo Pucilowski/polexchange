@@ -10,7 +10,6 @@ import java.util.Collection;
  * Created by martin on 03/02/14.
  */
 public interface MarketService {
-
     Collection<MarketDTO> getMarkets();
 
     MarketDTO getMarket(String base, String counter);

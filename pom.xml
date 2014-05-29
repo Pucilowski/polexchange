@@ -14,7 +14,7 @@
         <module>matcher</module>
         <module>matcher/integration</module>
         <module>common</module>
-        <module>api-common</module>
+        <module>common/api</module>
     </modules>
 
     <properties>

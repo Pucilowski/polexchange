@@ -4,16 +4,17 @@ import com.pucilowski.exchange.api.user.request.SubmitOrder;
 import com.pucilowski.exchange.common.enums.OrderSide;
 import com.pucilowski.exchange.main.ServletInitializer;
 import com.pucilowski.exchange.main.service.UserService;
-import com.pucilowski.exchange.main.web.controller.api.MarketApiController;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.security.Principal;
+import java.util.Collections;
 
 /**
  * Created by martin on 19/05/14.
@@ -28,7 +29,6 @@ public class Cli {
     public Cli() {
         userService = context.getBean(UserService.class);
 
-
         InputStreamReader input = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(input);
         String line;
@@ -38,7 +38,8 @@ public class Cli {
                     String[] parts = line.split(" ");
                     OrderSide side = parts[0].equalsIgnoreCase("bid") ? OrderSide.BID : OrderSide.ASK;
 
-                    submitOrder(side, Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+                    User u = new User("A", "b", Collections.<GrantedAuthority>emptyList());
+                    submitOrder(u, side, Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
                 } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                     e.printStackTrace();
                 }
@@ -49,14 +50,14 @@ public class Cli {
 
     }
 
-    public static final String BASE = "ltc";
-    public static final String COUNTER = "btc";
+    public static final String BASE = "gbp";
+    public static final String COUNTER = "usd";
 
-    public void submitOrder(OrderSide side, int price, int quantity) {
+    public void submitOrder(UserDetails principal, OrderSide side, int price, int quantity) {
         SubmitOrder order = new SubmitOrder(BASE, COUNTER, side, price, quantity);
 
         System.out.println("Submitting: " + order);
-        userService.submitOrder(order);
+        userService.submitOrder(principal, order);
     }
 
     static ConfigurableApplicationContext context;

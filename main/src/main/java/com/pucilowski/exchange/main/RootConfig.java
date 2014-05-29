@@ -3,6 +3,9 @@ package com.pucilowski.exchange.main;
 import com.pucilowski.exchange.integration.service.client.MatcherClientConfig;
 import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 /**
  * Created by martin on 13/05/14.
@@ -24,5 +27,10 @@ public class RootConfig {
             }
         };
     }*/
+
+    @Bean
+    public static PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 }

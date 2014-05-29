@@ -2,8 +2,8 @@ package com.pucilowski.exchange.main.persistence.entity;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pucilowski.exchange.common.enums.OrderStatus;
 import com.pucilowski.exchange.common.enums.OrderSide;
+import com.pucilowski.exchange.common.enums.OrderStatus;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,7 +11,6 @@ import java.util.Date;
 /**
  * Created by martin on 08/01/14.
  */
-
 
 @Entity
 @Table(name = "orders")
@@ -43,14 +42,12 @@ public class Order {
     @Column(nullable = false)
     public OrderStatus status;
 
-
     @Basic(optional = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(insertable = false, updatable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP")
+    @Column(updatable = false)
     public Date opened = null;
 
     @Temporal(TemporalType.TIMESTAMP)
-    /*@Column(updatable = false)*/
     public Date closed = null;
 
     public Order() {

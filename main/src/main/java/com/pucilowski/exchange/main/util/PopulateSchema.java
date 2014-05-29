@@ -39,7 +39,31 @@ public class PopulateSchema {
         Market ppcBtc = new Market(new CurrencyPair(ppc, btc));
         Market dogeBtc = new Market(new CurrencyPair(doge, btc));
         marketRepository.save(new ArrayList<>(Arrays.asList(ltcBtc, ppcBtc, dogeBtc)));
+    }
 
+    public void populateCurrencies2(CurrencyRepository currencyRepository, MarketRepository marketRepository) {
+        Currency btc = new Currency("BTC", "Bitcoin");
+        Currency ltc = new Currency("LTC", "Litecoin");
+        Currency ppc = new Currency("PPC", "Peercoin");
+        Currency doge = new Currency("DOGE", "Dogecoin");
+        currencyRepository.save(new ArrayList<>(Arrays.asList(btc, ltc, ppc, doge)));
+
+        Market ltcBtc = new Market(new CurrencyPair(ltc, btc));
+        Market ppcBtc = new Market(new CurrencyPair(ppc, btc));
+        Market dogeBtc = new Market(new CurrencyPair(doge, btc));
+        marketRepository.save(new ArrayList<>(Arrays.asList(ltcBtc, ppcBtc, dogeBtc)));
+    }
+
+    public static void populateCurrencies3(CurrencyRepository currencyRepository, MarketRepository marketRepository) {
+        Currency usd = new Currency("USD", "United States Dollar");
+        Currency gbp = new Currency("GBP", "Pound Sterling");
+        Currency pln = new Currency("PLN", "Polish Zloty");
+        currencyRepository.save(new ArrayList<>(Arrays.asList(usd, gbp, pln)));
+
+        Market ltcBtc = new Market(new CurrencyPair(gbp, usd));
+        Market ppcBtc = new Market(new CurrencyPair(pln, usd));
+        Market dogeBtc = new Market(new CurrencyPair(gbp, pln));
+        marketRepository.save(new ArrayList<>(Arrays.asList(ltcBtc, ppcBtc, dogeBtc)));
     }
 
     public static void main(String[] args) {
