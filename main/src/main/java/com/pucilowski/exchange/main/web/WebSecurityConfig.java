@@ -15,11 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 
 @Configuration
-//@EnableAutoConfiguration
 @EnableWebSecurity
-//@EnableWebMvcSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -34,36 +31,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .formLogin()
                         //.defaultSuccessUrl("/user")
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
-
-        if (true) return;
-
-        http
-                .csrf()
-                .disable()
-                .authorizeRequests()
-                .antMatchers("/resources*//**").permitAll()
-                .antMatchers("/dashboard").permitAll()
-                .antMatchers("/sign-up").permitAll()
-                .antMatchers("/api/contacts*//**").authenticated()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/")
-                .loginProcessingUrl("/loginprocess")
-                .failureUrl("/?loginFailure=true")
-                .permitAll();
-
-        http
-                .authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
-                .anyRequest().authenticated();
-        http
-                .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .and()

@@ -26,7 +26,6 @@ import java.util.List;
  */
 
 //TODO these can be cached
-
 @Service
 @Transactional(readOnly = true)
 public class MarketServiceImpl implements MarketService {

@@ -34,7 +34,7 @@ public class TradeListenerImpl implements TradeListener {
 
     //TODO do it with less queries
     @Override
-    @Transactional //TODO check if the message pull and database ops are atomic
+    @Transactional
     public void tradeExecuted(TradeExecuted trade) {
         System.out.println("In: " + trade);
 
